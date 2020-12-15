@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html>
+  <head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-PH99RV3');</script>
+<!-- End Google Tag Manager -->
+
+
+
+    <link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css' />
+
+    <style type='text/css'>
+      :root {
+        --color:skyblue;
+      }
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Quicksand', 'Helvetica', sans-serif;
+        background-color: #f3f3f3;
+      }
+
+      h1 {
+        font-size: 1.3em;
+        text-align: center;
+        background-color: white;
+      }
+
+      .grid4-container,
+      .grid3-container,
+      .grid2-container,
+      grid1-container {
+        display: grid;
+        grid-template-columns: repeat(3, 33%);
+        background-color: white;
+        max-width: 80%;
+        margin: 0 auto;
+        padding: 0.9em;
+        /*box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);*/
+        font-size: .9em;
+        text-align: center;
+        align-items: center;
+      }
+      .grid2-container {
+        grid-template-columns: repeat(2, 50%);
+      }
+
+      .grid1-container {
+        grid-template-columns: 100%;
+      }
+      .grid4-container {
+        grid-template-columns: 15% 35% 25% 25%;
+      }
+
+      .grid-header,
+      .grid-item {
+        justify-self: start;
+      }
+
+      .grid-label {
+        background-color: var(--color);
+      }
+
+      button {
+        border-radius: 2px;
+        background-color: var(--color);
+        font-weight: bold;
+        box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, 0.08);
+        padding: 7px 16px;
+        border: 0;
+        margin-top: 5px;
+      }
+
+      button:disabled {
+        background: lightgray;
+        color: #555;
+        cursor: not-allowed;
+      }
+
+      .about {
+        border-radius: 10px;
+        background-color: whitesmoke;
+        padding: 0px 16px;
+        border: 2px solid var(--color);
+        margin-top: 5px;
+        font-size: 28px;
+      }
+
+      .fixedWidth {
+        width: 80px;
+      }
+
+      .quantity {
+        margin-left: 5px;
+        margin-right: 5px;
+      }
+
+      .outputText {
+        height: 1.5em;
+      } 
+      .console {
+        height: 6em;
+        font-size: .5em;
+        text-align: left;
+      }
+
+      .span2 {
+        grid-column: 1 / 3;
+      }
+      .span3 {
+        grid-column: 1 / 4;
+      }
+      .span4 {
+        grid-column: 1 / 5;
+      }
+
+      .checkoutGap {
+        grid-gap: 4px;
+      }
+
+
+      /* Create a custom checkbox */
+      .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 25px;
+        width: 25px;
+        background-color: #eee;
+      }
+
+      /* On mouse-over, add a grey background color */
+      .container:hover input " .checkmark {
+        background-color: #ccc;
+      }
+
+      /* When the checkbox is checked, add a blue background */
+      .container input:checked " .checkmark {
+        background-color: #2196f3;
+      }
+
+      /* Create the checkmark/indicator (hidden when not checked) */
+      .checkmark:after {
+        content: '';
+        position: absolute;
+        display: none;
+      }
+
+      /* Show the checkmark when checked */
+      .container input:checked " .checkmark:after {
+        display: block;
+      }
+
+      /* Style the checkmark/indicator */
+      .container .checkmark:after {
+        left: 9px;
+        top: 5px;
+        width: 5px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+      }
+    </style>
+
+  </head>
+
+
+
+<body onload='setup()'>
+
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PH99RV3"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+    <title>The Store</title>
+
+    <h1>Box of Fruit</h1>
+
+    <div class='grid2-container'>
+      <div class='grid-label span2'>Search</div>
+    </div>
+    <div class='grid2-container'>
+
+      <div class='grid-item'>Find something</div>
+      <div class='grid-item'><button id='search' onclick='search()'>Search</button></div>
+    </div>
+
+    <div class='grid4-container'>
+      <div class='grid-label span4'>Your Cart</div>
+
+      <div class='grid-item'>Apples</div>
+      <div class='grid-item'><button class='about' onclick='about("1")'>&#127822;</button></div>
+      <div class='grid-item'>$5.00</div>
+      <div class='grid-item'><button type='button' onclick='addToCart("1")'>+</button><span class='quantity' id='quantity1'>0</span><button type='button' onclick='removeFromCart("1")'>-</button></div>
+      <div class='grid-item'>Bananas</div>
+      <div class='grid-item'><button class='about' onclick='about("2")'>&#127820;</button></div>
+      <div class='grid-item'>$7.00</div>
+      <div class='grid-item'><button type='button' onclick='addToCart("2")'>+</button><span class='quantity' id='quantity2'>0</span><button type='button' onclick='removeFromCart("2")'>-</button></div>
+      <div class='grid-item'>Oranges</div>
+      <div class='grid-item'><button class='about' onclick='about("3")'>&#127818;</button></div>
+      <div class='grid-item'>$9.00</div>
+      <div class='grid-item'><button type='button' onclick='addToCart("3")'>+</button><span class='quantity' id='quantity3'>0</span><button type='button' onclick='removeFromCart("3")'>-</button></div>
+    </div>
+
+    <div class='grid2-container checkoutGap'>
+      <div class='grid-label span2'>Checkout</div>
+
+      <div class='grid-item'>Total</div>
+      <div class='grid-item' id='total'>$0.00</div>
+
+      <div class='grid-item'><label class='container'>Use 10% Off Coupon?</label> <input type='checkbox' id='couponCB' onclick='useCoupon(this)' /><span class='checkmark'></span></div>
+      <div class='grid-item' id='coupon'></div>
+
+      <div class='grid-item'>5% Tax</div>
+      <div class='grid-item' id='tax'>$0.00</div>
+      <div class='grid-item'>Flat Shipping</div>
+      <div class='grid-item' id='shipping'>$5.00</div>
+
+      <div class='grid-item'>Final Total</div>
+      <div class='grid-item' id='finalTotal'>$0.00</div>
+    </div>
+
+    <div class='grid2-container'>
+      <div class='grid-label span2'>Review and Pay</div>
+    </div>
+
+    <div class='grid2-container'>
+      <div class='grid-item'>Review Your Order</div>
+      <div class='grid-item'><button class='fixedWidth' id='review' onclick='review()'>Review</button></div>
+
+      <div class='grid-item'>Pay Now</div>
+      <div class='grid-item'><button class='fixedWidth' id='pay' onclick='pay()'>Pay</button></div>
+    </div>
+
+  <div class='grid2-container'>
+      <div class='grid-label span2'>Reset</div>
+      <div class='grid-item'>Reset system (no event)</div>
+      <div class='grid-item'><button id='reset' onclick='resetSystem()'>Reset</button></div>
+    </div>
+
+    <div class='grid2-container'>
+      <div class='grid-label span2'>Console</div>
+
+      <div class='grid-item span2 outputText' id='outputText'></div>
+      <div class='grid-item span2 console' id='console'></div>
+    </div>
+
+    <script type='text/javascript'>
+      const __apples = { id: '1', name: 'Apples', price: 5, brand: 'FunFruit', category: 'Fruit', variant: 'HoneyCrisp' };
+      const __bananas = { id: '2', name: 'Bananas', price: 7, brand: 'FunFruit', category: 'Fruit', variant: 'Lady Finger' };
+      const __oranges = { id: '3', name: 'Oranges', price: 9, brand: 'FunFruit', category: 'Fruit', variant: 'Seville' };
+      const __products = { item1: __apples, item2: __bananas, item3: __oranges };
+
+
+      function setup() {
+        //localStorage.removeItem('cart');
+        saveCart(getCart());
+        redisplay();
+      }
+
+      function reset() {
+        localStorage.removeItem('cart');
+        saveCart(getCart());
+        redisplay();
+      }
+
+      function saveCart(cart) {
+        localStorage.setItem('cart', JSON.stringify(cart));
+      }
+
+      function getCart() {
+        var cart = localStorage.getItem('cart');
+        if (cart == null || Object.keys(cart).length == 0) {
+          cart = {};
+          Object.keys(__products).forEach(function (key) {
+          var product = __products[key];
+            cart['quantity' + product.id] = 0;
+          });
+        } else {
+          cart = JSON.parse(cart);
+        }
+        return cart;
+      }
+
+      function resetSystem() {
+        reset();
+        message( 'Reset the Store', '');
+      }
+      function search() {
+        var impressions = [];
+        var cnt = 1;
+        Object.keys(__products).forEach(function (key) {
+          var product = __products[key];
+          impressions.push({
+            name: product.name, // Name or ID is required.
+            id: product.id,
+            price: product.price,
+            brand: product.brand,
+            category: product.category,
+            variant: product.variant,
+            list: 'Search Results',
+            position: cnt,
+          });
+          cnt++;
+        });
+
+        var dl = {
+          ecommerce: {
+            currencyCode: 'EUR', // Local currency is optional.
+            impressions: impressions,
+          },
+        };
+        dataLayer.push( dl );
+        message ('Product Impressions', JSON.stringify( dl ));
+      }
+
+      function about(id) {
+        var product = __products['item' + id];
+/* skipping productClick 
+        dataLayer.push({
+          event: 'productClick',
+          ecommerce: {
+            click: {
+              actionField: { list: 'Search Results' }, // Optional list property.
+              products: [
+                {
+                  name: product.name, // Name or ID is required.
+                  id: product.id,
+                  price: product.price,
+                  brand: product.brand,
+                  category: product.cat,
+                  variant: product.variant,
+                  position: product.position,
+                },
+              ],
+            },
+          },
+          eventCallback: function () {
+            document.location = product.name + '.html';
+          },
+        });*/
+
+        //product detail view
+        var dl = {
+          "ecommerce": {
+            "detail": {
+              "actionField": {"list": "Fruit Gallery"},    // "detail" actions have an optional list property.
+              "products": [{
+                  name: product.name, // Name or ID is required.
+                  id: product.id,
+                  price: product.price,
+                  brand: product.brand,
+                  category: product.cat,
+                  variant: product.variant,
+               }]
+             }
+           }
+        };
+        dataLayer.push( dl );
+        message( 'Product Detail', JSON.stringify( dl ));
+      }
+
+      function addToCart(id) {
+        var product = __products['item' + id];
+        updateCart(product, +1);
+        var dl = {
+          event: 'addToCart',
+          ecommerce: {
+            currencyCode: 'USD',
+            add: {
+              // "add" actionFieldObject measures.
+              products: [
+                {
+                  //  adding a product to a shopping cart.
+                  name: product.name,
+                  id: product.id,
+                  price: product.price,
+                  brand: product.brand,
+                  category: product.category,
+                  variant: product.variant,
+                  quantity: 1,
+                },
+              ],
+            },
+          },
+        };
+        dataLayer.push( dl );
+        message( 'Add to Cart', JSON.stringify( dl ));
+      }
+
+      function removeFromCart(id) {
+        var elem = document.getElementById('quantity' + id);
+        var quantity = elem.innerHTML;
+        var iquantity = Number(quantity);
+        if (iquantity == 0) {
+          // no go
+        } else {
+          var product = __products['item' + id];
+          updateCart(product, -1);
+          var dl = {
+            event: 'removeFromCart',
+            ecommerce: {
+              remove: {
+                // "remove" actionFieldObject measures.
+                products: [
+                  {
+                    //  removing a product to a shopping cart.
+                    name: product.name,
+                    id: product.id,
+                    price: product.price,
+                    brand: product.brand,
+                    category: product.category,
+                    variant: product.variant,
+                    quantity: 1,
+                  },
+                ],
+              },
+            },
+          };
+          dataLayer.push( dl );
+          dataLayer.push( dl );
+          message( 'Remove from Cart', JSON.stringify( dl ));
+        }
+        
+      }
+
+      function updateCart(item, change) {
+        // quantity + or - 1
+        var cart = getCart();
+        var id = item.id;
+        var current = cart['quantity' + id];
+        current += change;
+        cart['quantity' + id] = current;
+        saveCart(cart);
+        redisplay();
+      }
+
+      function redisplay() {
+        var cart = getCart();
+        Object.keys(__products).forEach(function (key) {
+          var product = __products[key];
+          document.getElementById('quantity' + product.id).innerHTML = Number(cart['quantity' + product.id]);
+        });
+
+        var purchase = calculatePurchase();
+        document.getElementById('total').innerHTML = '$' + purchase.total.toFixed(2);
+
+        var elem = document.getElementById('couponCB');
+        if (purchase.useCoupon) {
+          document.getElementById('coupon').innerHTML = '- $' + purchase.discount.toFixed(2);
+        } else {
+          document.getElementById('coupon').innerHTML = '';
+        }
+        document.getElementById('tax').innerHTML = '$' + purchase.tax.toFixed(2);
+
+        document.getElementById('finalTotal').innerHTML = '$' + purchase.finalTotal.toFixed(2);
+
+        document.getElementById('review').disabled = purchase.finalTotal == 0;
+
+        document.getElementById('pay').disabled = true;
+
+        message('','');
+      }
+
+      function useCoupon(id) {
+        redisplay();
+      }
+
+      function review() {
+        var dl = {
+          event: 'checkoutOption',
+          ecommerce: {
+            checkout_option: {
+              actionField: { step: 1, option: 'review' },
+            },
+          },
+        };
+
+        dataLayer.push( dl );
+        redisplay();
+        document.getElementById('pay').disabled = false;
+        document.getElementById('review').disabled = true;
+  
+        message( 'Checkout Option 1', JSON.stringify( dl ));
+      }
+
+      function pay() {
+       var dl1= {
+          event: 'checkoutOption',
+          ecommerce: {
+            checkout_option: {
+              actionField: { step: 2, option: 'pay' },
+            },
+          },
+        };
+
+        dataLayer.push( dl1 );
+
+        var cart = getCart();
+        var purchase = calculatePurchase();
+
+        var products = [];
+
+        Object.keys(__products).forEach(function (key) {
+          var product = __products[key];
+          var iquantity = Number(cart['quantity' + product.id]);
+          if ( iquantity > 0 ) {
+            var obj = {
+               name: product.name, // Name or ID is required.
+                  id: product.id,
+                  price: product.price,
+                  brand: product.brand,
+                  category: product.category,
+                  variant: product.variant,
+                  quantity: iquantity,
+                  coupon: '', // Optional fields may be omitted or set to empty string.
+            }
+            products.push( obj );
+          } 
+        });
+
+       
+        var dl2 = {
+          ecommerce: {
+            purchase: {
+              actionField: {
+                id: Math.floor(Date.now() / 1000), // Transaction ID. Required for purchases and refunds.
+                affiliation: 'Online Store',
+                revenue: purchase.finalTotal, // Total transaction value (incl. tax and shipping)
+                tax: purchase.tax,
+                shipping: '5.00',
+                coupon: purchase.useCoupon ? "FRUIT21":"",
+              },
+              products: products,
+            },
+          },
+        };
+        dataLayer.push(dl2);
+
+        reset();
+
+      message( 'Checkout Option 2 and Purchase', JSON.stringify( dl1 ) + '<br>' + JSON.stringify( dl2 ));
+  
+        
+      }
+
+      function calculatePurchase() {
+        var purchase = {};
+        var cart = getCart();
+        var total = 0;
+        Object.keys(__products).forEach(function (key) {
+          var product = __products[key];
+          var elem = document.getElementById('quantity' + product.id);
+          var iquantity = Number(cart['quantity' + product.id]);
+          var price = __products['item' + product.id].price;
+          total += iquantity * price;
+        });
+
+        purchase.total = total;
+        var elem = document.getElementById('couponCB');
+        purchase.useCoupon = elem.checked;
+
+        if (elem.checked) {
+          var discount = total * 0.1;
+          total -= discount;
+          purchase.discount = discount;
+        } else {
+          purchase.discount = 0;
+        }
+
+        var tax = total * 0.05;
+        purchase.tax = tax;
+
+        total += tax;
+        total = total > 0 ? total + 5 : total; // only add shipping if total
+
+        purchase.finalTotal = total;
+        return purchase;
+      }
+
+      function message( shortText, longText ) {
+        document.getElementById('outputText').innerHTML = shortText;
+        document.getElementById('console').innerHTML = longText;
+
+      }
+    </script>
+  </body>
+</html>
